@@ -71,7 +71,6 @@ def predict(config: Config, model_path: str, data_path: str, threshold=None) -> 
     return pd.DataFrame(rows)
 
 
-
 def main():
     parser = argparse.ArgumentParser(description="Predict stress + early warning + explanations")
     parser.add_argument("--model", default="outputs/models/rf_stress_model.joblib")
@@ -84,7 +83,6 @@ def main():
     data_path = args.data or cfg.data_path
 
     out = predict(cfg, args.model, data_path, threshold=args.threshold)
-
     os.makedirs(os.path.dirname(args.save), exist_ok=True)
     out.to_csv(args.save, index=False)
 
