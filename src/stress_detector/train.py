@@ -1,3 +1,4 @@
+
 import argparse
 import json
 import os
@@ -8,12 +9,14 @@ from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDis
 
 
 try:
+    # When run as module: python -m stress_detector.train
     from .config import Config
     from .data import load_swell_csv, standardize_columns, drop_missing
     from .features import numeric_feature_columns, compute_personal_baseline, add_delta_from_baseline, make_labels
     from .model import build_model, save_model
     from .utils import ensure_dir
 except ImportError:
+    # When run as script: python src/stress_detector/train.py  (VS Code Play button)
     from stress_detector.config import Config
     from stress_detector.data import load_swell_csv, standardize_columns, drop_missing
     from stress_detector.features import numeric_feature_columns, compute_personal_baseline, add_delta_from_baseline, make_labels
@@ -28,31 +31,33 @@ def train(config: Config, out_dir: str = "outputs"):
         )
 
     df = load_swell_csv(config.data_path)
-    df = standardize_columns(df, config.raw_participant_col, config.participant_col,
-                             config.raw_condition_col, config.condition_col)
+    df = standardize_columns(
+        df,
+        config.raw_participant_col, config.participant_col,
+        config.raw_condition_col, config.condition_col
+    )
 
-    # Drop only rows missing participant/condition
+    # Only drop rows missing critical columns (avoid losing data)
     df = drop_missing(df, required_cols=[config.participant_col, config.condition_col])
 
     exclude = [config.participant_col, config.condition_col]
     base_feats = numeric_feature_columns(df, exclude=exclude)
 
-    baseline = compute_personal_baseline(df, config.participant_col, config.condition_col,
-                                         config.neutral_code, base_feats)
+    baseline = compute_personal_baseline(
+        df, config.participant_col, config.condition_col,
+        config.neutral_code, base_feats
+    )
     df2 = add_delta_from_baseline(df, baseline, config.participant_col, base_feats)
 
     delta_feats = [c for c in df2.columns if c.endswith('_delta')]
     feature_cols = base_feats + delta_feats
 
     X = df2[feature_cols]
-    # Fill NaNs (including those created from 999) with median
-    X = X.fillna(X.median(numeric_only=True))
+    X = X.fillna(X.median(numeric_only=True))  # safe fill
 
     y = make_labels(df2, config.condition_col, config.neutral_code, config.stress_codes)
 
-    if len(y) < 5:
-        raise ValueError(f"Not enough usable rows after preprocessing: {len(y)}")
-
+    # Robust split
     test_size = 0.2 if len(y) >= 10 else 0.5
     strat = y if (y.nunique() > 1 and y.value_counts().min() >= 2) else None
 

@@ -1,8 +1,0 @@
-__pycache__/
-*.py[cod]
-.venv/
-venv/
-/data/*.csv
-/outputs/
-.ipynb_checkpoints/
-.DS_Store
