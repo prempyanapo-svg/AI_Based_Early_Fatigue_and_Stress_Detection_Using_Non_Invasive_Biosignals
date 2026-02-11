@@ -26,7 +26,7 @@ This project uses the **SWELL Knowledge Work (SWELL-KW)** dataset (physiology fe
 
 ### Where to get the dataset
 Download from the official archive (DANS Data Station):
-- DOI: https://doi.org/10.17026/DANS-X55-69ZP
+- DOI: https://ssh.datastations.nl/file.xhtml?fileId=189473&version=4.1
 
 > The dataset is **not included** in this repository. Please download it from the official source.
 
