@@ -20,6 +20,16 @@ python -m stress_detector.train --data "data/D - Physiology features (HR_HRV_SCL
 python -m stress_detector.predict --model outputs/models/rf_stress_model.joblib   --data "data/D - Physiology features (HR_HRV_SCL - final).csv"   --save outputs/reports/predictions.csv
 ```
 
+### VS Code Tip (Play ▶️ button)
+You can run the project using the **Play ▶️ button** in VS Code:
+
+1. Open `run_train.py`
+2. Click **Run Python File ▶️** (top-right)
+
+Then do the same for:
+- `run_predict.py`
+
+
 ## Dataset (SWELL-KW)
 
 This project uses the **SWELL Knowledge Work (SWELL-KW)** dataset (physiology feature file: `D - Physiology features (HR_HRV_SCL - final).csv`).
