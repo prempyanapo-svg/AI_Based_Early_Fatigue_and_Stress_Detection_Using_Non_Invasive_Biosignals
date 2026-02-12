@@ -2,7 +2,13 @@
 
 This repository implements a Python machine-learning pipeline to detect **stress / early fatigue risk** using **non-invasive physiological features** (HR/HRV/SCL).
 
-## Quick Start
+
+
+## Precomputed outputs included
+This repo can include precomputed results in `outputs/reports/` for easy review.
+If you run the code, files in `outputs/reports/` may be overwritten (regenerated).
+
+## Quick Start Windows
 
 ### Install
 ```bash
@@ -20,6 +26,16 @@ python -m stress_detector.train --data "data/D - Physiology features (HR_HRV_SCL
 python -m stress_detector.predict --model outputs/models/rf_stress_model.joblib   --data "data/D - Physiology features (HR_HRV_SCL - final).csv"   --save outputs/reports/predictions.csv
 ```
 
+## Quick Start (macOS / Linux)
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+pip install -e .
+python3 -m stress_detector.train --data "data/D - Physiology features (HR_HRV_SCL - final).csv" --out outputs
+python3 -m stress_detector.predict --model "outputs/models/rf_stress_model.joblib"   --data "data/D - Physiology features (HR_HRV_SCL - final).csv"   --save "outputs/reports/predictions.csv"
+```
+
 ### VS Code Tip (Play ▶️ button)
 You can run the project using the **Play ▶️ button** in VS Code:
 
@@ -29,6 +45,8 @@ You can run the project using the **Play ▶️ button** in VS Code:
 Then do the same for:
 - `run_predict.py`
 
+### VS Code Windows Run Guide
+See `VSCode_Windows_Run_Guide` for more info
 
 ## Dataset (SWELL-KW)
 
