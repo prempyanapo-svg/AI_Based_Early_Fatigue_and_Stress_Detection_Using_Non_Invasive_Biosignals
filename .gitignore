@@ -5,3 +5,5 @@ venv/
 /data/*.csv
 data/*.csv
 outputs/models/
+.ipynb_checkpoints/
+.DS_Store
