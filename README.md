@@ -45,4 +45,4 @@ data/D - Physiology features (HR_HRV_SCL - final).csv
 - Value `999` is treated as missing (NaN).
 
 ### Citation
-Kraaij, W., Koldijk, S., & Sappelli, M. (2014). *The SWELL Knowledge Work Dataset for Stress and User Modeling Research*. DANS Data Station Social Sciences and Humanities. https://doi.org/10.17026/DANS-X55-69ZP
+Kraaij, W., Koldijk, S., & Sappelli, M. (2014). *The SWELL Knowledge Work Dataset for Stress and User Modeling Research*. DANS Data Station Social Sciences and Humanities. https://doi.org/10.17026/DANS-X55-69ZP , https://ssh.datastations.nl/file.xhtml?fileId=189473&version=4.1 
