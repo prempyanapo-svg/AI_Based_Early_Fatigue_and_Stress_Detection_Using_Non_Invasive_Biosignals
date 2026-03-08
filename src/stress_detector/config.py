@@ -16,6 +16,6 @@ class Config:
     neutral_code: int = 1
     stress_codes: tuple = (2, 3)
 
-    consecutive_threshold: int = 3
+    consecutive_threshold: int = 3 #change this to increase/decrease early_warning threshold
     random_state: int = 42
     n_estimators: int = 300
